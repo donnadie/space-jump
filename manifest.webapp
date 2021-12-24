@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "name": "Space Jump",
+  "description": "Platform game",
+  "type": "web",
+  "launch_path": "/index.html",
+  "icons": {
+    "56": "/assets/icons/space_jump_56.png",
+    "112": "/assets/icons/space_jump_112.png"
+  },
+  "theme_color": "#004a55",
+  "developer": {
+    "name": "Don Nadie",
+    "url": "https://donnadie.itch.io/"
+  },
+  "locales": {
+    "en-US": {
+      "name": "Space Jump",
+      "subtitle": "Platform Game",
+      "description": "Explore all planets to save the universe."
+    }
+  },
+  "default_locale": "en-US",
+  "categories": ["games"],
+  "fullscreen": "true",
+  "orientation": [ "portrait" ]
+}
