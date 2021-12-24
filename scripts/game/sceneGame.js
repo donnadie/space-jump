@@ -38,37 +38,7 @@ sceneGame.preload = function() {
 };
 
 sceneGame.create = function() {
-  /*
-  getKaiAd({
-    publisher: '5093b99c-d0ab-4d70-bc3c-447013f22103',
-    app: 'bobStones',
-    slot: '',
-    test:0,
-    timeout:60000,
-    onerror: err => console.error('Custom catch:', err),
-    onready: ad => {
-        // Ad is ready to be displayed
-        // custom event
-      document.addEventListener('keydown', function kbdListener() {
-        if(viewAd === true) {
-          document.removeEventListener('keydown', kbdListener)
-          // calling 'display' will display the ad
-          ad.call('display')
-        }
-      })
-
-      // user clicked the ad
-      ad.on('click', () => console.log('click event') )
-
-      // user closed the ad (currently only with fullscreen)
-      ad.on('close', () => console.log('close event') )
-
-      // the ad succesfully displayed
-      ad.on('display', () => console.log('display event') )
-    }
-  })
-  */
-
+  
   platforms = [];
   collider_platforms = [];
   sky_background = [];
@@ -187,7 +157,7 @@ sceneGame.update = function() {
     player.y = platforms[plataforma_activa].y - 50;
     platforms[plataforma_activa].body.checkCollision.up = true;
     */
-    sceneGame.end();
+    sceneGame.end(); 
 
 }
 

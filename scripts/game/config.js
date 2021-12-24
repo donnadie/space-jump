@@ -3,7 +3,7 @@ var config = {
 	width: 240,
 	height: 316,
 	backgroundColor: '#000000',
-	scene: [ sceneBoot, scenePreload, sceneTitle, sceneMenu, sceneInstructions, sceneCredits, sceneSettings, scenePlayMode, scenePlay, sceneGame, sceneGamePaused, sceneEnd ],
+	scene: [ sceneBoot, scenePreload, sceneTitle, sceneGame, sceneEnd ],
     physics: {
         default: 'arcade',
         arcade: {
