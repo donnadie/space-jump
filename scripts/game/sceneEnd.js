@@ -35,7 +35,7 @@ sceneEnd.create = function() {
 };
 
 sceneEnd.update = function() {
-      
+  
 };
 
 sceneEnd.handleKeyDown = function(evt) {

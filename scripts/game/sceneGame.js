@@ -28,6 +28,9 @@ var plataforma_min_vel = 30;
 var plataforma_max_vel = 60;
 var level_up_at = 2;
 var textLevelUp;
+var spaceship_thrust_sound;
+var spaceship_drop_sound;
+
 sceneGame.init = function() {
 
     this.fontColor = '#e9e9e9';
@@ -138,6 +141,17 @@ sceneGame.create = function() {
     textLevelUp.setOrigin(0.5, 0.5);
     textLevelUp.visible = false;
 
+    spaceship_thrust_sound = this.sound.add('spaceship_thrust');
+    spaceship_drop_sound = this.sound.add('spaceship_drop',{
+        mute: false,
+        volume: 1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: false,
+        delay: 0
+    });
+    spaceship_crash_sound = this.sound.add('spaceship_crash');
    //add keyboard listener
    document.addEventListener('keydown', this.handleKeyDown);
    document.addEventListener('keyup', this.handleKeyUp);
@@ -145,26 +159,48 @@ sceneGame.create = function() {
 
 sceneGame.update = function() {
   
-
-
-  if (player.y > 580) {
-
-    //console.log("Cayó");
-    /*
+  console.log(player.y);
+  if (player.y > 570) {
     
-    platforms[plataforma_activa].alpha = 1;
+      //console.log("Cayó");
+      /*
+      
+      platforms[plataforma_activa].alpha = 1;
+      
+      player.y = platforms[plataforma_activa].y - 50;
+      platforms[plataforma_activa].body.checkCollision.up = true;
+      */
+      if(spaceship_drop_sound.isPlaying === false){
+        
+        spaceship_drop_sound.stop();
+        spaceship_crash_sound.play();
+        sceneGame.end(); 
+      }
+  }else{
     
-    player.y = platforms[plataforma_activa].y - 50;
-    platforms[plataforma_activa].body.checkCollision.up = true;
-    */
-    sceneGame.end(); 
+    if (player.y >= platforms[plataforma_activa].y) {
 
-}
+      
+      if(spaceship_drop_sound.isPlaying === false) {
+          console.log("Esta cayendo");
+          spaceship_thrust_sound.stop();
+          spaceship_drop_sound.play();
+          console.log(plataforma_activa);
+  
+      }
+  
+    } 
+     
+  }
 
 if (cursors.up.isUp && pointer_abajo === false)
 {
     dejar_de_acelerar = true;
     player.anims.stop("thrust");
+    if(spaceship_thrust_sound.isPlaying === true) {
+
+        spaceship_thrust_sound.stop();
+    }
     player.setFrame(0);
 }
 else
@@ -301,6 +337,10 @@ if (player.body.touching.down){
         if ((cursors.up.isDown || pointer_abajo) && puede_despegar){
             
             player.anims.play("thrust");
+            if(spaceship_thrust_sound.isPlaying === false) {
+
+                spaceship_thrust_sound.play();
+            }
             platforms[plataforma_activa].body.checkCollision.up = false;
             platforms[plataforma_activa].alpha = 0;
             puede_despegar = false;
