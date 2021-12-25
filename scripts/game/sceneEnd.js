@@ -41,11 +41,11 @@ sceneEnd.update = function() {
 sceneEnd.handleKeyDown = function(evt) {
 
   document.removeEventListener('keydown', sceneEnd.handleKeyDown);
-  sceneEnd.scene.start('game');
+  sceneEnd.scene.start('title');
 };
 
 sceneEnd.pointer_down = function() {
   
   document.removeEventListener('keydown', sceneEnd.handleKeyDown);
-  sceneEnd.scene.start('game');
+  sceneEnd.scene.start('title');
 };

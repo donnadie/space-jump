@@ -33,6 +33,7 @@ sceneGame.init = function() {
     this.space_sound;
     this.level_up_sound;
     this.points_sound;
+    this.background_scene_game_sound;
     puntos = 0;
     tiempo_transcurrido_de_juego = 0;
 };
@@ -147,6 +148,17 @@ sceneGame.create = function() {
         delay: 0
     });
     this.space_sound.play();
+    
+    this.background_scene_game_sound = this.sound.add('background_scene_game',{
+        mute: false,
+        volume: 0.1,
+        rate: 1,
+        detune: 0,
+        seek: 0,
+        loop: true,
+        delay: 0
+    });
+    this.background_scene_game_sound.play();
     //add keyboard listener
    document.addEventListener('keydown', this.handleKeyDown);
    document.addEventListener('keyup', this.handleKeyUp);
@@ -169,6 +181,7 @@ sceneGame.update = function() {
         this.spaceship_drop_sound.stop();
         this.spaceship_crash_sound.play();
         this.space_sound.stop();
+        this.background_scene_game_sound.stop();
         sceneGame.end(); 
       }
   }else{
