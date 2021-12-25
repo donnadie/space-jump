@@ -26,10 +26,11 @@ scenePreload.preload = function() {
     this.load.spritesheet('sky', 'assets/images/sky.png', { frameWidth: 240, frameHeight: 200 });
 	//this.load.audio('spaceship_thrust', 'assets/sounds/spaceship_thrust.wav');
 	this.load.audio('spaceship_thrust', 'assets/sounds/spaceship_thrust.mp3');
-	this.load.audio('spaceship_drop', 'assets/sounds/spaceship_drop.wav');
-	this.load.audio('spaceship_crash', 'assets/sounds/spaceship_crash.wav');
+	this.load.audio('spaceship_drop', 'assets/sounds/spaceship_drop.mp3');
+	this.load.audio('spaceship_crash', 'assets/sounds/spaceship_crash.mp3');
 	this.load.audio('space_sound', 'assets/sounds/space_sound.mp3');
 	this.load.audio('level_up', 'assets/sounds/level_up.mp3');
+	this.load.audio('points', 'assets/sounds/points.mp3');
 };
 
 scenePreload.updateBar = function(percentage) {

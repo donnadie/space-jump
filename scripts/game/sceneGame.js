@@ -32,6 +32,7 @@ sceneGame.init = function() {
     this.spaceship_crash_sound;
     this.space_sound;
     this.level_up_sound;
+    this.points_sound;
     puntos = 0;
     tiempo_transcurrido_de_juego = 0;
 };
@@ -132,6 +133,7 @@ sceneGame.create = function() {
     });
 
     this.level_up_sound = this.sound.add('level_up');
+    this.points_sound = this.sound.add('points');
     this.spaceship_crash_sound = this.sound.add('spaceship_crash');
     this.spaceship_crash_sound.setVolume(0.2);
 
@@ -205,6 +207,7 @@ if (this.player.body.touching.down){
     if(this.plataforma_activa !== this.plataforma_anterior) {
         puntos++;
         textPuntos.setText(puntos);
+        this.points_sound.play();
         if (puntos % this.level_up_at === 0){
             this.textLevelUp.visible = true;
             this.level_up_sound.play();
