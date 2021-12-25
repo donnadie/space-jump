@@ -13,14 +13,11 @@ var config = {
     },
 };
 
-// Create the game with our config values
-// this will also inject our canvas element into the HTML source 
-// for us
-var viewAd = false;
+// game variables
 var soundOnOff = true;
 var soundVolume = 1;
-var gameState = 'new';
 var fontFamily = 'font1';
-
+var puntos = 0;
+var tiempo_transcurrido_de_juego = 0;
 
 var game = new Phaser.Game(config);
