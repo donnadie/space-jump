@@ -1,8 +1,9 @@
-// end scene
+  // end scene
 var sceneEnd = new Phaser.Scene("end");
 sceneEnd.init = function(){
 
   this.fontColor = '#e9e9e9';
+  this.sky_background = [];
 }
 sceneEnd.preload = function() {
 	
@@ -10,11 +11,13 @@ sceneEnd.preload = function() {
 
 sceneEnd.create = function() {
 
-  //this.spriteSelectedItem = this.add.sprite(0,0,'selectedItem');
-  //this.spriteSelectedItem.setOrigin(0.5,0.5);
+  for(let i=0; i < 4; i++){
+    this.sky_background[i] = this.physics.add.sprite(0, 200 * i, 'sky').setOrigin(0, 0).setFrame(i);
+    this.sky_background[i].setImmovable(true);
+    this.sky_background[i].body.allowGravity = false;
+    this.sky_background[i].body.velocity.set(0,0);
+  }
 
-  //this.cameras.main.setBackgroundColor('#004a55');
-  
   textFinalScore = this.add.text(this.cameras.main.centerX, 34, "Final Score").setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
   textFinalScore.setOrigin(0.5, 0.5);
 
