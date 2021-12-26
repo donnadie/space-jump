@@ -12,6 +12,7 @@ sceneGame.init = function() {
     this.collider_platforms = [];
     this.sky_background = [];
     this.empuje = 0;
+    this.maximo_empuje = 240;
     this.dejar_de_acelerar = true;
     this.plataforma_activa = 0;
     this.plataforma_anterior = 0;
@@ -151,7 +152,7 @@ sceneGame.create = function() {
     
     this.background_scene_game_sound = this.sound.add('background_scene_game',{
         mute: false,
-        volume: 0.1,
+        volume: 0.15,
         rate: 1,
         detune: 0,
         seek: 0,
@@ -372,7 +373,7 @@ if (this.player.body.touching.down){
 
         this.empuje *= 1.09;
         this.player.setVelocityY(this.empuje);
-        if(this.empuje <= -250) {
+        if(this.empuje <= (-1) * this.maximo_empuje) {
             this.dejar_de_acelerar = true;
         }
     }
