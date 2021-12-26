@@ -2,7 +2,7 @@ var config = {
 	type: Phaser.AUTO,
 	width: 240,
 	height: 320,
-	backgroundColor: '#ffffff',
+	backgroundColor: '#000000',
 	scene: [ sceneBoot, scenePreload, sceneTitle, sceneGame, sceneEnd ],
     physics: {
         default: 'arcade',

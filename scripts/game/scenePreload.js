@@ -5,15 +5,22 @@ var timer;
 scenePreload.preload = function() {
 
 	// add the background
-	this.cameras.main.setBackgroundColor('#004a55');
+	this.cameras.main.setBackgroundColor('#000000');
 	var logo = this.add.sprite(0,0,'logo');
 	logo.setOrigin(0,0);
 	
 	// Add loading screen bars
     this.graphics = this.add.graphics();
-	this.newGraphics = this.add.graphics();
+	credits_text = this.add.text(this.cameras.main.centerX,160,"Graphics by:", { fontSize: '18px', fill: '#FFF' });
+	credits_text.setOrigin(0.5, 0.5);
+	credits_text = this.add.text(this.cameras.main.centerX,180,"DynaDee", { fontSize: '18px', fill: '#FFF' });
+	credits_text.setOrigin(0.5, 0.5);
+	credits_text = this.add.text(this.cameras.main.centerX,220,"Program by:", { fontSize: '18px', fill: '#FFF' });
+	credits_text.setOrigin(0.5, 0.5);
+	credits_text = this.add.text(this.cameras.main.centerX,240,"Donnadie", { fontSize: '18px', fill: '#FFF' });
+	credits_text.setOrigin(0.5, 0.5);
 	
-	loadingText = this.add.text(this.cameras.main.centerX,300,"Loading: ", { fontSize: '18px', fill: '#FFF' });
+	loadingText = this.add.text(this.cameras.main.centerX,290,"Loading: ", { fontSize: '14px', fill: '#FFF' });
 	loadingText.setOrigin(0.5, 0.5);
 	//loadingText.visible = false;
 	this.load.on('progress', this.updateBar, {loadingText:loadingText});
@@ -36,7 +43,7 @@ scenePreload.preload = function() {
 
 scenePreload.updateBar = function(percentage) {
 	percentage = percentage * 100;
-	loadingText.setText("Loading: " + percentage + "%");
+	loadingText.setText("Loading: " + Number(percentage).toFixed(2) + "%");
 };
 
 
@@ -50,15 +57,30 @@ scenePreload.complete = function() {
 scenePreload.create = function() {
 
 	timer = scenePreload.time.addEvent({
-		delay: 2000,                // ms
+		delay: 1000,                // ms
 		callback: scenePreload.go_to_title,
 		loop: true,
 		paused: false
 	});
+	//add keyboard listener
+	document.addEventListener('keydown', scenePreload.handleKeyDown);
+
+	this.input.on('pointerdown', scenePreload.pointer_down, this);
 };
 
 scenePreload.go_to_title = function() {
 
-	scenePreload.scene.start("title");
+	loadingText.setText("Press any key to continue");
 }
 
+scenePreload.handleKeyDown = function(evt) {
+
+	document.removeEventListener('keydown', scenePreload.handleKeyDown);
+	scenePreload.scene.start('title');
+};
+  
+scenePreload.pointer_down = function() {
+	
+	document.removeEventListener('keydown', scenePreload.handleKeyDown);
+	scenePreload.scene.start('title');
+};

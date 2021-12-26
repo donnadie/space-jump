@@ -44,7 +44,7 @@ sceneGame.preload = function() {
 };
 
 sceneGame.create = function() {
-
+    
     this.physics.world.setBounds(0, 0, 240, 600);
     
     for(let i=0; i < 4; i++){

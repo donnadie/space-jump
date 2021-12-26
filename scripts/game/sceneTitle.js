@@ -3,8 +3,6 @@ var sceneTitle = new Phaser.Scene("title");
 
 sceneTitle.init = function() {
 
-  this.title_sound;
-
 };
 
 sceneTitle.preload = function() {
@@ -18,12 +16,24 @@ sceneTitle.create = function() {
   var title = this.add.sprite(0,0,'title');
   title.setOrigin(0,0);
 
+  title_text = this.add.text(this.cameras.main.centerX,180,"Tap,", { fontSize: '18px', fill: '#FFF' });
+	title_text.setOrigin(0.5, 0.5);
+  
+  title_text = this.add.text(this.cameras.main.centerX,210,"Click or", { fontSize: '18px', fill: '#FFF' });
+	title_text.setOrigin(0.5, 0.5);
+  
+  title_text = this.add.text(this.cameras.main.centerX,240,"Press any key", { fontSize: '18px', fill: '#FFF' });
+	title_text.setOrigin(0.5, 0.5);
+
+  title_text = this.add.text(this.cameras.main.centerX,270,"to Play", { fontSize: '18px', fill: '#FFF' });
+	title_text.setOrigin(0.5, 0.5);
+
   //add keyboard listener
-  document.addEventListener('keydown', this.handleKeyDown);
+  document.addEventListener('keydown', sceneTitle.handleKeyDown);
   
   this.input.on('pointerdown', sceneTitle.pointer_down, this);
 
-  this.title_sound = this.sound.add('title',{
+  sceneTitle.title_sound = this.sound.add('title',{
     mute: false,
     volume: 0.3,
     rate: 1,
@@ -32,7 +42,7 @@ sceneTitle.create = function() {
     loop: true,
     delay: 0
 });
-this.title_sound.play();
+sceneTitle.title_sound.play();
   
 };
 
@@ -44,6 +54,7 @@ sceneTitle.handleKeyDown = function(evt) {
 };
 
 sceneTitle.pointer_down = function() {
+  
   sceneTitle.title_sound.stop();
   document.removeEventListener('keydown', sceneTitle.handleKeyDown);
   sceneTitle.scene.start('game');
