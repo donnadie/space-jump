@@ -119,7 +119,7 @@ sceneGame.create = function() {
     //textTiempo = this.add.text(10, 240, puntos).setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
     //textTiempo.setOrigin(0, 0.5);
 
-    this.textLevelUp = this.add.text(120, 400, "Level Up!").setFontFamily(fontFamily).setFontSize(30).setColor(this.fontColor );
+    this.textLevelUp = this.add.text(120, 400, "Level Up!").setFontFamily(fontFamily).setFontSize(24).setColor(this.fontColor);
     this.textLevelUp.setOrigin(0.5, 0.5);
     this.textLevelUp.visible = false;
 

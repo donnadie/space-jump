@@ -2,6 +2,12 @@
 var scenePreload = new Phaser.Scene("preload");
 
 var timer;
+
+scenePreload.init = function() {
+	
+	this.fontColor = '#e9e9e9';
+}
+
 scenePreload.preload = function() {
 
 	// add the background
@@ -11,18 +17,36 @@ scenePreload.preload = function() {
 	
 	// Add loading screen bars
     this.graphics = this.add.graphics();
-	credits_text = this.add.text(this.cameras.main.centerX,160,"Graphics by:", { fontSize: '18px', fill: '#FFF' });
-	credits_text.setOrigin(0.5, 0.5);
-	credits_text = this.add.text(this.cameras.main.centerX,180,"DynaDee", { fontSize: '18px', fill: '#FFF' });
-	credits_text.setOrigin(0.5, 0.5);
-	credits_text = this.add.text(this.cameras.main.centerX,220,"Program by:", { fontSize: '18px', fill: '#FFF' });
-	credits_text.setOrigin(0.5, 0.5);
-	credits_text = this.add.text(this.cameras.main.centerX,240,"Donnadie", { fontSize: '18px', fill: '#FFF' });
-	credits_text.setOrigin(0.5, 0.5);
 	
-	loadingText = this.add.text(this.cameras.main.centerX,290,"Loading: ", { fontSize: '14px', fill: '#FFF' });
+	credits_text = this.add.text(120, 160, "Graphics by:").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
+	credits_text.setOrigin(0.5, 0.5);
+
+	credits_text = this.add.text(120, 180, "DynaDee").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
+	credits_text.setOrigin(0.5, 0.5);
+
+	credits_text = this.add.text(120, 220, "Code by:").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
+	credits_text.setOrigin(0.5, 0.5);
+
+	credits_text = this.add.text(120, 240, "Donnadie").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
+	credits_text.setOrigin(0.5, 0.5);
+
+	
+	loadingText = this.add.text(120, 290, "Loading: ").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
 	loadingText.setOrigin(0.5, 0.5);
-	//loadingText.visible = false;
+	
+	go_to_title_text_1 = scenePreload.add.text(120, 270, "Tap,").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
+	go_to_title_text_1.setOrigin(0.5, 0.5);
+	go_to_title_text_1.visible = false;
+	go_to_title_text_2 = scenePreload.add.text(120, 280, "Click or").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
+	go_to_title_text_2.setOrigin(0.5, 0.5);
+	go_to_title_text_2.visible = false;
+	go_to_title_text_3 = scenePreload.add.text(120, 290, "Press any key").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
+	go_to_title_text_3.setOrigin(0.5, 0.5);
+	go_to_title_text_3.visible = false;
+	go_to_title_text_4 = scenePreload.add.text(120, 300, "to continue").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
+	go_to_title_text_4.setOrigin(0.5, 0.5);
+	go_to_title_text_4.visible = false;
+
 	this.load.on('progress', this.updateBar, {loadingText:loadingText});
     this.load.on('complete', this.complete, {scene:this.scene});
 
@@ -69,8 +93,13 @@ scenePreload.create = function() {
 };
 
 scenePreload.go_to_title = function() {
-
-	loadingText.setText("Press any key to continue");
+	
+	loadingText.visible = false;
+	go_to_title_text_1.visible = true;
+	go_to_title_text_2.visible = true;
+	go_to_title_text_3.visible = true;
+	go_to_title_text_4.visible = true;
+	
 }
 
 scenePreload.handleKeyDown = function(evt) {

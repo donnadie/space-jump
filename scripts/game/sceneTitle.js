@@ -2,7 +2,7 @@
 var sceneTitle = new Phaser.Scene("title");
 
 sceneTitle.init = function() {
-
+  this.fontColor = '#e9e9e9';
 };
 
 sceneTitle.preload = function() {
@@ -16,17 +16,18 @@ sceneTitle.create = function() {
   var title = this.add.sprite(0,0,'title');
   title.setOrigin(0,0);
 
-  title_text = this.add.text(this.cameras.main.centerX,180,"Tap,", { fontSize: '18px', fill: '#FFF' });
-	title_text.setOrigin(0.5, 0.5);
-  
-  title_text = this.add.text(this.cameras.main.centerX,210,"Click or", { fontSize: '18px', fill: '#FFF' });
-	title_text.setOrigin(0.5, 0.5);
-  
-  title_text = this.add.text(this.cameras.main.centerX,240,"Press any key", { fontSize: '18px', fill: '#FFF' });
-	title_text.setOrigin(0.5, 0.5);
-
-  title_text = this.add.text(this.cameras.main.centerX,270,"to Play", { fontSize: '18px', fill: '#FFF' });
-	title_text.setOrigin(0.5, 0.5);
+  title_text_1 = this.add.text(120, 180, "Tap,").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
+	title_text_1.setOrigin(0.5, 0.5);
+	
+	title_text_2 = this.add.text(120, 210, "Click or").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
+	title_text_2.setOrigin(0.5, 0.5);
+	
+	title_text_3 = this.add.text(120, 240, "Press any key").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
+	title_text_3.setOrigin(0.5, 0.5);
+	
+	title_text_4 = this.add.text(120, 270, "to PLAY").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
+	title_text_4.setOrigin(0.5, 0.5);
+	
 
   //add keyboard listener
   document.addEventListener('keydown', sceneTitle.handleKeyDown);
