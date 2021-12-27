@@ -24,9 +24,13 @@ sceneGame.init = function() {
     this.proxima_plataforma_para_descender = 2;
     this.pointer_abajo = false;
     this.plataforma_sizes = [0.2, 0.15, 0.1, 0.05];
-    this.plataforma_min_vel = 30;
+    this.plataforma_min_vel = 20;
     this.plataforma_max_vel = 60;
     this.level_up_at = 2;
+    this.plataformas_restantes = 2;
+    this.level_nro = 0;
+    this.level_multiplicador = 1;
+    this.change_level = 0;
     this.textLevelUp;
     this.spaceship_thrust_sound;
     this.spaceship_drop_sound;
@@ -36,6 +40,7 @@ sceneGame.init = function() {
     this.points_sound;
     this.background_scene_game_sound;
     puntos = 0;
+    this.plataforma_nro = 0;
     tiempo_transcurrido_de_juego = 0;
 };
 
@@ -113,15 +118,24 @@ sceneGame.create = function() {
       loop: true
     });
 
-    textPuntos = this.add.text(230, 240, puntos).setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
+    textPuntos = this.add.text(230, 240, "S:" + puntos).setFontFamily(fontFamily).setFontSize(15).setColor(this.fontColor );
     textPuntos.setOrigin(1, 0.5);
     
+    this.text_level_nro = this.add.text(5, 240, "L:" + this.level_nro).setFontFamily(fontFamily).setFontSize(15).setColor(this.fontColor );
+    this.text_level_nro.setOrigin(0, 0.5);
+
+    this.text_plataformas_restantes = this.add.text(6, 260, this.plataformas_restantes + "/" + this.level_up_at).setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor );
+    this.text_plataformas_restantes.setOrigin(0, 0.5);
     //textTiempo = this.add.text(10, 240, puntos).setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
     //textTiempo.setOrigin(0, 0.5);
 
-    this.textLevelUp = this.add.text(120, 400, "Level Up!").setFontFamily(fontFamily).setFontSize(24).setColor(this.fontColor);
+    this.textLevelUp = this.add.text(120, 385, "Level Up!").setFontFamily(fontFamily).setFontSize(24).setColor(this.fontColor);
     this.textLevelUp.setOrigin(0.5, 0.5);
     this.textLevelUp.visible = false;
+    
+    this.text_level__multiplicador = this.add.text(120, 415, this.level_multiplicador).setFontFamily(fontFamily).setFontSize(24).setColor(this.fontColor);
+    this.text_level__multiplicador.setOrigin(0.5, 0.5);
+    this.text_level__multiplicador.visible = false;
 
     this.spaceship_thrust_sound = this.sound.add('spaceship_thrust');
     this.spaceship_drop_sound = this.sound.add('spaceship_drop',{
@@ -169,7 +183,7 @@ sceneGame.update = function() {
   
   if (this.player.y > 570) {
     
-      //console.log("Cayó");
+      
       /*
       
       this.platforms[this.plataforma_activa].alpha = 1;
@@ -219,13 +233,35 @@ if (this.player.body.touching.down){
     
     //Sumo puntos si el jugador alcanzó la siguiente plataforma
     if(this.plataforma_activa !== this.plataforma_anterior) {
-        puntos++;
-        textPuntos.setText(puntos);
+
+        this.plataforma_nro++;
+        puntos += this.level_multiplicador;
+        textPuntos.setText("S:" + puntos);
         this.points_sound.play();
-        if (puntos % this.level_up_at === 0){
+        
+        this.text_plataformas_restantes.setText((this.level_up_at - (this.plataforma_nro % this.level_up_at)) +  "/" +  this.level_up_at);
+
+        if (this.plataforma_nro % this.level_up_at === 0){
+            this.level_nro++;
+            this.level_multiplicador++;
+
             this.textLevelUp.visible = true;
+            this.text_level__multiplicador.setText("x" + this.level_multiplicador);
+            this.text_level__multiplicador.visible = true;
+            this.text_level_nro.setText("L:" + this.level_nro);
             this.level_up_sound.play();
+
+            this.change_level++; 
+            
+            if(this.change_level % 2 === 0) {
+            
+                this.change_level = 0;
+                this.level_up_at += 2;
+                this.text_plataformas_restantes.setText((this.level_up_at - (this.plataforma_nro % this.level_up_at)) +  "/" +  this.level_up_at);
+            }
+            
         }
+
         this.plataforma_anterior = this.plataforma_activa;
         this.puede_despegar = true;
 
@@ -254,6 +290,7 @@ if (this.player.body.touching.down){
         if(this.platforms[this.plataforma_activa].y > 510){
             this.puede_despegar = true;
             this.textLevelUp.visible = false;
+            this.text_level__multiplicador.visible = false;
             //Paro de bajar el fondo y los reposiciono
             for(let i=0; i < 4; i++){
                 this.sky_background[i].body.velocity.set(0,0);
@@ -346,7 +383,6 @@ if (this.player.body.touching.down){
             
             if(this.player.anims.isPlaying === false){
 
-                console.log(this.player.anims.isPlaying);
                 this.player.anims.play("thrust");
             }
 
@@ -393,7 +429,7 @@ sceneGame.show_time = function() {
 
   tiempo_transcurrido_de_juego++;
   //textTiempo.setText(tiempo_transcurrido_de_juego);
-  //console.log(tiempo_transcurrido_de_juego);
+  
 }
 
 sceneGame.handleKeyDown = function(evt) {
