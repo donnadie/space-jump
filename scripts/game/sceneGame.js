@@ -25,7 +25,7 @@ sceneGame.init = function() {
     this.pointer_abajo = false;
     this.plataforma_sizes = [0.2, 0.15, 0.1, 0.05];
     this.plataforma_min_vel = 20;
-    this.plataforma_max_vel = 60;
+    this.plataforma_max_vel = 40;
     this.level_up_at = 2;
     this.plataformas_restantes = 2;
     this.level_nro = 0;
@@ -59,7 +59,9 @@ sceneGame.create = function() {
         this.sky_background[i].body.velocity.set(0,0);
     }
     
-    this.player = this.physics.add.sprite(120, 450, 'spaceship');
+    this.twin_star = this.add.sprite(200, 460, 'twin_star');
+    
+    this.player = this.physics.add.sprite(120, 460, 'spaceship');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(true);
 
@@ -74,9 +76,18 @@ sceneGame.create = function() {
         repeat: 0
     });
     
+    this.anims.create({
+        key: 'twin_star',
+        frames: this.anims.generateFrameNumbers('twin_star', { start: 0, end: 7 }),
+        frameRate: 7,
+        repeat: 0
+    });
+
+    this.twin_star.anims.play("twin_star");
+
     for(let i= 0; i < this.cantidad_plataformas; i++) {
         
-        this.platforms[i] = this.physics.add.image(120, this.posicion_plataforma_0 - this.distancia_entre_plataformas * i, 'ground').setScale(this.plataforma_sizes[Phaser.Math.Between(0, this.plataforma_sizes.length - 1)],0.6).refreshBody();
+        this.platforms[i] = this.physics.add.image(120, this.posicion_plataforma_0 - this.distancia_entre_plataformas * i, 'platform_' + Phaser.Math.Between(0, 1)).refreshBody();
 
         this.platforms[i].setImmovable(true);
         this.platforms[i].body.allowGravity = false;
@@ -181,6 +192,14 @@ sceneGame.create = function() {
 
 sceneGame.update = function() {
   
+  if(this.twin_star.anims.isPlaying === false) {
+
+    this.twin_star.x = Phaser.Math.Between(10,240);
+    this.twin_star.y = Phaser.Math.Between(240,500);
+    this.twin_star.anims.play("twin_star");
+    console.log("entro");
+  }
+
   if (this.player.y > 570) {
     
       
@@ -334,12 +353,12 @@ if (this.player.body.touching.down){
                 this.platforms[3].body.checkCollision.up = true;
                 this.platforms[3].alpha = 1;
 
-                this.platforms[3].setScale(this.plataforma_sizes[Phaser.Math.Between(0, this.plataforma_sizes.length - 1)],0.6)
+                this.platforms[3].image = "platform_" + Phaser.Math.Between(0, 1);
                 this.platforms[3].body.velocity.set(Phaser.Math.Between(this.plataforma_min_vel, this.plataforma_max_vel),0);
                 
                 this.platforms[4].body.checkCollision.up = true;
                 this.platforms[4].alpha = 1;
-                this.platforms[4].setScale(this.plataforma_sizes[Phaser.Math.Between(0, this.plataforma_sizes.length - 1)],0.6)
+                this.platforms[4].image = "platform_" + Phaser.Math.Between(0, 1);
                 this.platforms[4].body.velocity.set(Phaser.Math.Between(this.plataforma_min_vel, this.plataforma_max_vel),0);
 
             }else if(this.proxima_plataforma_para_descender === 1) {
@@ -349,12 +368,12 @@ if (this.player.body.touching.down){
                 
                 this.platforms[0].body.checkCollision.up = true;
                 this.platforms[0].alpha = 1;
-                this.platforms[0].setScale(this.plataforma_sizes[Phaser.Math.Between(0, this.plataforma_sizes.length - 1)],0.6)
+                this.platforms[0].image = "platform_" + Phaser.Math.Between(0, 1);
                 this.platforms[0].body.velocity.set(Phaser.Math.Between(this.plataforma_min_vel, this.plataforma_max_vel),0);
 
                 this.platforms[4].body.checkCollision.up = true;
                 this.platforms[4].alpha = 1;
-                this.platforms[4].setScale(this.plataforma_sizes[Phaser.Math.Between(0, this.plataforma_sizes.length - 1)],0.6)
+                this.platforms[4].image = "platform_" + Phaser.Math.Between(0, 1);
                 this.platforms[4].body.velocity.set(Phaser.Math.Between(this.plataforma_min_vel, this.plataforma_max_vel),0);
             }else{
                 
@@ -363,12 +382,12 @@ if (this.player.body.touching.down){
 
                 this.platforms[this.proxima_plataforma_para_descender - 1].body.checkCollision.up = true;
                 this.platforms[this.proxima_plataforma_para_descender - 1].alpha = 1;
-                this.platforms[this.proxima_plataforma_para_descender - 1].setScale(this.plataforma_sizes[Phaser.Math.Between(0, this.plataforma_sizes.length - 1)],0.6)
+                this.platforms[this.proxima_plataforma_para_descender - 1].image = "platform_" + Phaser.Math.Between(0, 1);
                 this.platforms[this.proxima_plataforma_para_descender - 1].body.velocity.set(Phaser.Math.Between(this.plataforma_min_vel, this.plataforma_max_vel),0);
 
                 this.platforms[this.proxima_plataforma_para_descender - 2].body.checkCollision.up = true;
                 this.platforms[this.proxima_plataforma_para_descender - 2].alpha = 1;
-                this.platforms[this.proxima_plataforma_para_descender - 2].setScale(this.plataforma_sizes[Phaser.Math.Between(0, this.plataforma_sizes.length - 1)],0.6)
+                this.platforms[this.proxima_plataforma_para_descender - 1].image = "platform_" + Phaser.Math.Between(0, 1);
                 this.platforms[this.proxima_plataforma_para_descender - 2].body.velocity.set(Phaser.Math.Between(this.plataforma_min_vel, this.plataforma_max_vel),0);
                 
             }

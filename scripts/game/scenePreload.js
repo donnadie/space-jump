@@ -52,8 +52,10 @@ scenePreload.preload = function() {
 
 	// Any Assets you want to load in
 	this.load.image('title', 'assets/images/title.png');
-	this.load.image('ground', 'assets/images/platform.png');
+	this.load.image('platform_0', 'assets/images/platform_0.png');
+	this.load.image('platform_1', 'assets/images/platform_1.png');
     this.load.spritesheet('spaceship', 'assets/images/spaceship.png', { frameWidth: 32, frameHeight: 34 });
+	this.load.spritesheet('twin_star', 'assets/images/TwinklingStar_Rec200ms.png', { frameWidth: 16, frameHeight: 16 });
     this.load.spritesheet('sky', 'assets/images/sky.png', { frameWidth: 240, frameHeight: 200 });
 	this.load.audio('spaceship_thrust', 'assets/sounds/spaceship_thrust.mp3');
 	this.load.audio('spaceship_drop', 'assets/sounds/spaceship_drop.mp3');
