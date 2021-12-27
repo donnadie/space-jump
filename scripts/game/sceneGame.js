@@ -250,7 +250,13 @@ if (this.player.body.touching.down){
             this.text_level__multiplicador.visible = true;
             this.text_level_nro.setText("L:" + this.level_nro);
             this.level_up_sound.play();
-
+            
+            if(this.plataforma_max_vel < 300){
+                this.plataforma_max_vel+=20;
+                console.log(this.plataforma_max_vel);
+            }
+            
+            
             this.change_level++; 
             
             if(this.change_level % 2 === 0) {
