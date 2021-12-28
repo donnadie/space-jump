@@ -18,12 +18,28 @@ sceneEnd.create = function() {
     this.sky_background[i].body.velocity.set(0,0);
   }
 
-  textFinalScore = this.add.text(this.cameras.main.centerX, 34, "Your Score").setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
-  textFinalScore.setOrigin(0.5, 0.5);
+  //textFinalScore = this.add.text(this.cameras.main.centerX, 10, "Your Score").setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
+  //textFinalScore.setOrigin(0.5, 0.5);
 
-  textPuntos = this.add.text(this.cameras.main.centerX, 160, puntos).setFontFamily(fontFamily).setFontSize(30).setColor(this.fontColor );
+
+  textPuntos = this.add.text(this.cameras.main.centerX, 50, "Platform Points").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor );
   textPuntos.setOrigin(0.5, 0.5);
   
+  textPuntos = this.add.text(this.cameras.main.centerX, 80, puntos).setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
+  textPuntos.setOrigin(0.5, 0.5);
+
+  textPuntos = this.add.text(this.cameras.main.centerX, 120, "Space cow Points").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor );
+  textPuntos.setOrigin(0.5, 0.5);
+  
+  textPuntos = this.add.text(this.cameras.main.centerX, 150, space_cow_cant).setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
+  textPuntos.setOrigin(0.5, 0.5);
+
+  textPuntos = this.add.text(this.cameras.main.centerX, 190, "Total Points").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor );
+  textPuntos.setOrigin(0.5, 0.5);
+
+  textPuntos = this.add.text(this.cameras.main.centerX, 220, puntos + space_cow_cant).setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
+  textPuntos.setOrigin(0.5, 0.5);
+
   go_to_title_text_1 = this.add.text(120, 270, "Tap,").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
 	go_to_title_text_1.setOrigin(0.5, 0.5);
 	

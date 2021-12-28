@@ -56,6 +56,7 @@ scenePreload.preload = function() {
 	this.load.image('platform_1', 'assets/images/platform_1.png');
     this.load.spritesheet('spaceship', 'assets/images/spaceship.png', { frameWidth: 32, frameHeight: 34 });
 	this.load.spritesheet('twin_star', 'assets/images/TwinklingStar_Rec200ms.png', { frameWidth: 16, frameHeight: 16 });
+	this.load.spritesheet('space_cow', 'assets/images/space_cow.png', { frameWidth: 48, frameHeight: 36 });
     this.load.spritesheet('sky', 'assets/images/sky.png', { frameWidth: 240, frameHeight: 200 });
 	this.load.audio('spaceship_thrust', 'assets/sounds/spaceship_thrust.mp3');
 	this.load.audio('spaceship_drop', 'assets/sounds/spaceship_drop.mp3');

@@ -12,7 +12,7 @@ sceneGame.init = function() {
     this.collider_platforms = [];
     this.sky_background = [];
     this.empuje = 0;
-    this.maximo_empuje = 240;
+    this.maximo_empuje = 250;
     this.dejar_de_acelerar = true;
     this.plataforma_activa = 0;
     this.plataforma_anterior = 0;
@@ -40,8 +40,11 @@ sceneGame.init = function() {
     this.points_sound;
     this.background_scene_game_sound;
     puntos = 0;
+    space_cow_cant = 0;
     this.plataforma_nro = 0;
     tiempo_transcurrido_de_juego = 0;
+    this.delay_warp = 0;
+    this.space_cow_velocity_x = -100;
 };
 
 sceneGame.preload = function() {
@@ -60,7 +63,17 @@ sceneGame.create = function() {
     }
     
     this.twin_star = this.add.sprite(200, 460, 'twin_star');
+
+    this.space_cow = this.physics.add.sprite(240, 320, 'space_cow');
+    this.space_cow.body.allowGravity = false;
+    this.space_cow.body.velocity.set(this.space_cow_velocity_x, 0);
     
+    this.space_cow.body.setSize(this.space_cow.width - 15, this.space_cow.height - 6, true); 
+    //this.space_cow.body.checkCollision.up = false;
+    //this.space_cow.body.checkCollision.left = false;
+    //this.space_cow.body.checkCollision.right = false;
+    this.space_cow.setDepth(10);
+
     this.player = this.physics.add.sprite(120, 460, 'spaceship');
     this.player.setBounce(0);
     this.player.setCollideWorldBounds(true);
@@ -68,6 +81,12 @@ sceneGame.create = function() {
     this.player.setDepth(10);
     this.player.body.setSize(this.player.width - 12, this.player.height, true); 
 
+    this.anims.create({
+        key: 'space_cow',
+        frames: this.anims.generateFrameNumbers('space_cow', { start: 0, end: 5 }),
+        frameRate: 15,
+        repeat: -1
+    });
 
     this.anims.create({
         key: 'thrust',
@@ -79,11 +98,14 @@ sceneGame.create = function() {
     this.anims.create({
         key: 'twin_star',
         frames: this.anims.generateFrameNumbers('twin_star', { start: 0, end: 7 }),
-        frameRate: 7,
+        frameRate: 5,
         repeat: 0
     });
 
     this.twin_star.anims.play("twin_star");
+    this.space_cow.anims.play("space_cow");
+
+    this.collider_space_cow = this.physics.add.collider(this.player, this.space_cow, null, function (){this.player_collides_space_cow = true;}, this);
 
     for(let i= 0; i < this.cantidad_plataformas; i++) {
         
@@ -132,6 +154,9 @@ sceneGame.create = function() {
     textPuntos = this.add.text(230, 240, "S:" + puntos).setFontFamily(fontFamily).setFontSize(15).setColor(this.fontColor );
     textPuntos.setOrigin(1, 0.5);
     
+    this.text_space_cow_count = this.add.text(230, 260, "C:" + space_cow_cant).setFontFamily(fontFamily).setFontSize(15).setColor(this.fontColor );
+    this.text_space_cow_count.setOrigin(1, 0.5);
+
     this.text_level_nro = this.add.text(5, 240, "L:" + this.level_nro).setFontFamily(fontFamily).setFontSize(15).setColor(this.fontColor );
     this.text_level_nro.setOrigin(0, 0.5);
 
@@ -192,12 +217,29 @@ sceneGame.create = function() {
 
 sceneGame.update = function() {
   
+  if(this.player_collides_space_cow === true){
+      console.log("Chocó");
+      space_cow_cant += this.level_multiplicador;
+      this.text_space_cow_count.setText("C:" + space_cow_cant);
+      this.space_cow.body.velocity.y = -100;
+      this.player_collides_space_cow = false;
+  }
+  if(this.space_cow.y < 120 || this.space_cow.y > 600) {
+
+    this.player_collides_space_cow = false;
+    this.space_cow.body.velocity.set(0, 0);
+  }
+
+  if(this.space_cow.body.velocity.x < 0) {
+    this.physics.world.wrap(this.space_cow, this.delay_warp);      
+  }
+  
+
   if(this.twin_star.anims.isPlaying === false) {
 
     this.twin_star.x = Phaser.Math.Between(10,240);
     this.twin_star.y = Phaser.Math.Between(240,500);
     this.twin_star.anims.play("twin_star");
-    console.log("entro");
   }
 
   if (this.player.y > 570) {
@@ -250,6 +292,16 @@ else
 
 if (this.player.body.touching.down){
     
+    //cambio direccion de la vaca si está a la altura del player
+    //console.log(this.player.y);
+    if(this.player.y > 300 && this.player.y < 400 && this.player.x < this.space_cow.x) {
+        
+        //this.space_cow.body = 120;
+        this.space_cow.flipX = true;
+        this.space_cow.body.velocity.x = (-1) * this.space_cow_velocity_x;
+    }
+
+    
     //Sumo puntos si el jugador alcanzó la siguiente plataforma
     if(this.plataforma_activa !== this.plataforma_anterior) {
 
@@ -272,7 +324,6 @@ if (this.player.body.touching.down){
             
             if(this.plataforma_max_vel < 300){
                 this.plataforma_max_vel+=20;
-                console.log(this.plataforma_max_vel);
             }
             
             
@@ -313,6 +364,15 @@ if (this.player.body.touching.down){
         this.player.body.velocity.set(0,200);
         
         if(this.platforms[this.plataforma_activa].y > 510){
+
+            //coloco la vaca
+            this.space_cow.x = 240;
+            this.space_cow.y = 320;
+            this.space_cow.flipX = false;
+            this.delay_warp = Phaser.Math.Between(0, 0)
+            this.space_cow_velocity_x = Phaser.Math.Between(-80, -60);
+            this.space_cow.body.velocity.set(this.space_cow_velocity_x, 0);
+
             this.puede_despegar = true;
             this.textLevelUp.visible = false;
             this.text_level__multiplicador.visible = false;
