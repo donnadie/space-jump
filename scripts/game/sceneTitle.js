@@ -11,8 +11,6 @@ sceneTitle.preload = function() {
 
 sceneTitle.create = function() {
 
-  //document.body.style.backgroundColor = "#004a55";
-
   var title = this.add.sprite(0,0,'title');
   title.setOrigin(0,0);
 
@@ -28,12 +26,6 @@ sceneTitle.create = function() {
   text_instructions = this.add.text(100, 260, "from below.  ").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
   text_instructions.setOrigin(0, 0.5);
 
-  //title_text_1 = this.add.text(120, 270, "Tap,").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
-	//title_text_1.setOrigin(0.5, 0.5);
-	
-	//title_text_2 = this.add.text(120, 280, "Click or").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
-	//title_text_2.setOrigin(0.5, 0.5);
-	
 	title_text_3 = this.add.text(120, 290, "Tap, Clikc or Press any key").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	title_text_3.setOrigin(0.5, 0.5);
 	
@@ -41,6 +33,13 @@ sceneTitle.create = function() {
 	title_text_4.setOrigin(0.5, 0.5);
 	
   this.space_cow = this.add.sprite(160, 210, 'space_cow');
+  this.anims.create({
+    key: 'space_cow',
+    frames: this.anims.generateFrameNumbers('space_cow', { start: 0, end: 5 }),
+    frameRate: 15,
+    repeat: -1
+});
+this.space_cow.anims.play('space_cow');
 
   //add keyboard listener
   document.addEventListener('keydown', sceneTitle.handleKeyDown);

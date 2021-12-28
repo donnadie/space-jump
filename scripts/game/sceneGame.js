@@ -295,10 +295,8 @@ else
 if (this.player.body.touching.down){
     
     //cambio direccion de la vaca si está a la altura del player
-    //console.log(this.player.y);
     if(this.player.y > 300 && this.player.y < 400 && this.player.x < this.space_cow.x) {
         
-        //this.space_cow.body = 120;
         this.space_cow.flipX = true;
         this.space_cow.body.velocity.x = (-1) * this.space_cow_velocity_x;
     }
@@ -515,8 +513,6 @@ sceneGame.end = function() {
 sceneGame.show_time = function() {
 
   tiempo_transcurrido_de_juego++;
-  //textTiempo.setText(tiempo_transcurrido_de_juego);
-  
 }
 
 sceneGame.handleKeyDown = function(evt) {

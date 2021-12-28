@@ -1,4 +1,4 @@
-  // end scene
+// end scene
 var sceneEnd = new Phaser.Scene("end");
 sceneEnd.init = function(){
 
@@ -17,11 +17,6 @@ sceneEnd.create = function() {
     this.sky_background[i].body.allowGravity = false;
     this.sky_background[i].body.velocity.set(0,0);
   }
-
-  //textFinalScore = this.add.text(this.cameras.main.centerX, 10, "Your Score").setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
-  //textFinalScore.setOrigin(0.5, 0.5);
-
-
   textPuntos = this.add.text(this.cameras.main.centerX, 50, "Platform Points").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor );
   textPuntos.setOrigin(0.5, 0.5);
   
@@ -46,10 +41,6 @@ sceneEnd.create = function() {
 	go_to_title_text_4 = this.add.text(120, 300, "to continue").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	go_to_title_text_4.setOrigin(0.5, 0.5);
 	
-  
-
-  //this.spriteSelectedItem.x = textPlayAgain.x;
-  //this.spriteSelectedItem.y = textPlayAgain.y;  
   
   
   //add keyboard listener

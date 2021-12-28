@@ -76,9 +76,8 @@ scenePreload.updateBar = function(percentage) {
 
 
 scenePreload.complete = function() {
+
 	console.log("COMPLETE!");
-	
-	//this.scene.start("title");
 };
 
 
