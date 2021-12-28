@@ -28,7 +28,7 @@ sceneEnd.create = function() {
   textPuntos = this.add.text(this.cameras.main.centerX, 80, puntos).setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
   textPuntos.setOrigin(0.5, 0.5);
 
-  textPuntos = this.add.text(this.cameras.main.centerX, 120, "Space cow Points").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor );
+  textPuntos = this.add.text(this.cameras.main.centerX, 120, "Cow Points").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor );
   textPuntos.setOrigin(0.5, 0.5);
   
   textPuntos = this.add.text(this.cameras.main.centerX, 150, space_cow_cant).setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
@@ -40,18 +40,13 @@ sceneEnd.create = function() {
   textPuntos = this.add.text(this.cameras.main.centerX, 220, puntos + space_cow_cant).setFontFamily(fontFamily).setFontSize(20).setColor(this.fontColor );
   textPuntos.setOrigin(0.5, 0.5);
 
-  go_to_title_text_1 = this.add.text(120, 270, "Tap,").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
-	go_to_title_text_1.setOrigin(0.5, 0.5);
-	
-	go_to_title_text_2 = this.add.text(120, 280, "Click or").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
-	go_to_title_text_2.setOrigin(0.5, 0.5);
-	
-	go_to_title_text_3 = this.add.text(120, 290, "Press any key").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
+  go_to_title_text_3 = this.add.text(120, 290, "Tap, Click or Press any key").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	go_to_title_text_3.setOrigin(0.5, 0.5);
 	
-	go_to_title_text_4 = this.add.text(120, 300, "to continue").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
+	go_to_title_text_4 = this.add.text(120, 300, "to continue").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	go_to_title_text_4.setOrigin(0.5, 0.5);
 	
+  
 
   //this.spriteSelectedItem.x = textPlayAgain.x;
   //this.spriteSelectedItem.y = textPlayAgain.y;  

@@ -16,18 +16,31 @@ sceneTitle.create = function() {
   var title = this.add.sprite(0,0,'title');
   title.setOrigin(0,0);
 
-  title_text_1 = this.add.text(120, 180, "Tap,").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
-	title_text_1.setOrigin(0.5, 0.5);
+  text_instructions = this.add.text(20, 160, "Try to herd").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
+  text_instructions.setOrigin(0, 0.5);
+
+  text_instructions = this.add.text(40, 180, "the space cows  ").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
+  text_instructions.setOrigin(0, 0.5);
+
+  text_instructions = this.add.text(50, 240, "by hitting them  ").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
+  text_instructions.setOrigin(0, 0.5);
+
+  text_instructions = this.add.text(100, 260, "from below.  ").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
+  text_instructions.setOrigin(0, 0.5);
+
+  //title_text_1 = this.add.text(120, 270, "Tap,").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
+	//title_text_1.setOrigin(0.5, 0.5);
 	
-	title_text_2 = this.add.text(120, 210, "Click or").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
-	title_text_2.setOrigin(0.5, 0.5);
+	//title_text_2 = this.add.text(120, 280, "Click or").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
+	//title_text_2.setOrigin(0.5, 0.5);
 	
-	title_text_3 = this.add.text(120, 240, "Press any key").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
+	title_text_3 = this.add.text(120, 290, "Tap, Clikc or Press any key").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	title_text_3.setOrigin(0.5, 0.5);
 	
-	title_text_4 = this.add.text(120, 270, "to PLAY").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
+	title_text_4 = this.add.text(120, 300, "to continue").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	title_text_4.setOrigin(0.5, 0.5);
 	
+  this.space_cow = this.add.sprite(160, 210, 'space_cow');
 
   //add keyboard listener
   document.addEventListener('keydown', sceneTitle.handleKeyDown);

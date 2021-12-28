@@ -66,6 +66,7 @@ scenePreload.preload = function() {
 	this.load.audio('points', 'assets/sounds/points.mp3');
 	this.load.audio('title', 'assets/sounds/title.mp3');
 	this.load.audio('background_scene_game', 'assets/sounds/background_scene_game.mp3');
+	this.load.audio('space_cow', 'assets/sounds/space_cow.mp3');
 };
 
 scenePreload.updateBar = function(percentage) {

@@ -186,6 +186,7 @@ sceneGame.create = function() {
 
     this.level_up_sound = this.sound.add('level_up');
     this.points_sound = this.sound.add('points');
+    this.space_cow_sound = this.sound.add('space_cow');
     this.spaceship_crash_sound = this.sound.add('spaceship_crash');
     this.spaceship_crash_sound.setVolume(0.2);
 
@@ -223,6 +224,7 @@ sceneGame.update = function() {
       this.text_space_cow_count.setText("C:" + space_cow_cant);
       this.space_cow.body.velocity.y = -100;
       this.player_collides_space_cow = false;
+      this.space_cow_sound.play();
   }
   if(this.space_cow.y < 120 || this.space_cow.y > 600) {
 
