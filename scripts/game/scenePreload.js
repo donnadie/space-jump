@@ -34,18 +34,15 @@ scenePreload.preload = function() {
 	loadingText = this.add.text(120, 290, "Loading: ").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
 	loadingText.setOrigin(0.5, 0.5);
 	
-	go_to_title_text_1 = scenePreload.add.text(120, 270, "Tap,").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
+	go_to_title_text_1 = this.add.text(120, 290, "Tap, Click or Press any key").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	go_to_title_text_1.setOrigin(0.5, 0.5);
-	go_to_title_text_1.visible = false;
-	go_to_title_text_2 = scenePreload.add.text(120, 280, "Click or").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
+	
+	go_to_title_text_2 = this.add.text(120, 300, "to continue").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	go_to_title_text_2.setOrigin(0.5, 0.5);
+
+	go_to_title_text_1.visible = false;
 	go_to_title_text_2.visible = false;
-	go_to_title_text_3 = scenePreload.add.text(120, 290, "Press any key").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
-	go_to_title_text_3.setOrigin(0.5, 0.5);
-	go_to_title_text_3.visible = false;
-	go_to_title_text_4 = scenePreload.add.text(120, 300, "to continue").setFontFamily(fontFamily).setFontSize(10).setColor(this.fontColor);
-	go_to_title_text_4.setOrigin(0.5, 0.5);
-	go_to_title_text_4.visible = false;
+
 
 	this.load.on('progress', this.updateBar, {loadingText:loadingText});
     this.load.on('complete', this.complete, {scene:this.scene});
@@ -100,9 +97,6 @@ scenePreload.go_to_title = function() {
 	loadingText.visible = false;
 	go_to_title_text_1.visible = true;
 	go_to_title_text_2.visible = true;
-	go_to_title_text_3.visible = true;
-	go_to_title_text_4.visible = true;
-	
 }
 
 scenePreload.handleKeyDown = function(evt) {

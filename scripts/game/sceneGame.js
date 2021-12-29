@@ -44,7 +44,7 @@ sceneGame.init = function() {
     this.plataforma_nro = 0;
     tiempo_transcurrido_de_juego = 0;
     this.delay_warp = 0;
-    this.space_cow_velocity_x = -100;
+    this.space_cow_velocity_x = 0;
 };
 
 sceneGame.preload = function() {
@@ -64,7 +64,7 @@ sceneGame.create = function() {
     
     this.twin_star = this.add.sprite(200, 460, 'twin_star');
 
-    this.space_cow = this.physics.add.sprite(240, 320, 'space_cow');
+    this.space_cow = this.physics.add.sprite(120, 320, 'space_cow');
     this.space_cow.body.allowGravity = false;
     this.space_cow.body.velocity.set(this.space_cow_velocity_x, 0);
     
@@ -151,7 +151,7 @@ sceneGame.create = function() {
       loop: true
     });
 
-    textPuntos = this.add.text(230, 240, "S:" + puntos).setFontFamily(fontFamily).setFontSize(15).setColor(this.fontColor );
+    textPuntos = this.add.text(230, 240, "P:" + puntos).setFontFamily(fontFamily).setFontSize(15).setColor(this.fontColor );
     textPuntos.setOrigin(1, 0.5);
     
     this.text_space_cow_count = this.add.text(230, 260, "C:" + space_cow_cant).setFontFamily(fontFamily).setFontSize(15).setColor(this.fontColor );
@@ -211,6 +211,10 @@ sceneGame.create = function() {
         delay: 0
     });
     this.background_scene_game_sound.play();
+
+    this.instructions_text = this.add.text(120, 500, "Tap, Click or UP to jump").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
+	this.instructions_text.setOrigin(0.5, 0.5);
+
     //add keyboard listener
    document.addEventListener('keydown', this.handleKeyDown);
    document.addEventListener('keyup', this.handleKeyUp);
@@ -294,6 +298,7 @@ else
 
 if (this.player.body.touching.down){
     
+    this.player.body.velocity.x = 0;
     //cambio direccion de la vaca si está a la altura del player
     if(this.player.y > 300 && this.player.y < 400 && this.player.x < this.space_cow.x) {
         
@@ -307,7 +312,7 @@ if (this.player.body.touching.down){
 
         this.plataforma_nro++;
         puntos += this.level_multiplicador;
-        textPuntos.setText("S:" + puntos);
+        textPuntos.setText("P:" + puntos);
         this.points_sound.play();
         
         this.text_plataformas_restantes.setText((this.level_up_at - (this.plataforma_nro % this.level_up_at)) +  "/" +  this.level_up_at);
@@ -466,6 +471,7 @@ if (this.player.body.touching.down){
         
         if ((this.cursors.up.isDown || this.pointer_abajo) && this.puede_despegar){
             
+            this.instructions_text.visible = false;
             if(this.player.anims.isPlaying === false){
 
                 this.player.anims.play("thrust");

@@ -26,7 +26,7 @@ sceneTitle.create = function() {
   text_instructions = this.add.text(100, 260, "from below.  ").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
   text_instructions.setOrigin(0, 0.5);
 
-	title_text_3 = this.add.text(120, 290, "Tap, Clikc or Press any key").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
+	title_text_3 = this.add.text(120, 290, "Tap, Click or Press any key").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	title_text_3.setOrigin(0.5, 0.5);
 	
 	title_text_4 = this.add.text(120, 300, "to continue").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
