@@ -20,5 +20,8 @@ var fontFamily = 'font1';
 var puntos = 0;
 var space_cow_cant = 0;
 var tiempo_transcurrido_de_juego = 0;
+var hs_platforms; // mejor puntaje plataformas
+var hs_space_cows; // mejor space cows
+var hs_points; // mejor puntaje general
 
 var game = new Phaser.Game(config);

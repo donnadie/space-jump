@@ -215,6 +215,35 @@ sceneGame.create = function() {
     this.instructions_text = this.add.text(120, 500, "Tap, Click or UP to jump").setFontFamily(fontFamily).setFontSize(8).setColor(this.fontColor);
 	this.instructions_text.setOrigin(0.5, 0.5);
 
+    // carga puntajes jugador
+    
+    if (typeof localStorage.hs_platforms !== 'undefined'){
+        
+        hs_platforms = Number(localStorage.getItem('hs_platforms'));
+    }else{
+
+        hs_platforms = 0;
+        localStorage.setItem('hs_platforms', hs_platforms);
+    }
+
+    if (typeof localStorage.hs_space_cows !== 'undefined'){
+        
+        hs_space_cows = Number(localStorage.getItem('hs_space_cows'));
+    }else{
+
+        hs_space_cows = 0;
+        localStorage.setItem('hs_space_cows', hs_space_cows);
+    }
+
+    if (typeof localStorage.hs_points !== 'undefined'){
+        
+        hs_points = Number(localStorage.getItem('hs_points'));
+    }else{
+
+        hs_points = 0;
+        localStorage.setItem('hs_points', hs_points);
+}
+
     //add keyboard listener
    document.addEventListener('keydown', this.handleKeyDown);
    document.addEventListener('keyup', this.handleKeyUp);
@@ -223,7 +252,7 @@ sceneGame.create = function() {
 sceneGame.update = function() {
   
   if(this.player_collides_space_cow === true){
-      console.log("Chocó");
+      //console.log("Chocó");
       space_cow_cant += this.level_multiplicador;
       this.text_space_cow_count.setText("C:" + space_cow_cant);
       this.space_cow.body.velocity.y = -100;
