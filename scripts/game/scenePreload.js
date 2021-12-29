@@ -18,13 +18,13 @@ scenePreload.preload = function() {
 	// Add loading screen bars
     this.graphics = this.add.graphics();
 	
-	credits_text = this.add.text(120, 160, "Graphics by:").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
+	credits_text = this.add.text(120, 160, "Graphics:").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
 	credits_text.setOrigin(0.5, 0.5);
 
 	credits_text = this.add.text(120, 180, "DynaDee").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
 	credits_text.setOrigin(0.5, 0.5);
 
-	credits_text = this.add.text(120, 220, "Code by:").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
+	credits_text = this.add.text(120, 220, "Code:").setFontFamily(fontFamily).setFontSize(12).setColor(this.fontColor);
 	credits_text.setOrigin(0.5, 0.5);
 
 	credits_text = this.add.text(120, 240, "Donnadie").setFontFamily(fontFamily).setFontSize(14).setColor(this.fontColor);
