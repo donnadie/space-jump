@@ -244,7 +244,6 @@ sceneGame.create = function() {
         hs_points = 0;
         localStorage.setItem('hs_points', hs_points);
 }
-
     //add keyboard listener
    document.addEventListener('keydown', this.handleKeyDown);
    document.addEventListener('keyup', this.handleKeyUp);
@@ -508,7 +507,16 @@ if (this.player.body.touching.down){
                 this.spaceship_thrust_sound.play();
             }
             this.platforms[this.plataforma_activa].body.checkCollision.up = false;
-            this.platforms[this.plataforma_activa].alpha = 0;
+            //this.tween_plataforma_desaparece.destroy();
+            let tween_plataforma_desaparece = this.tweens.add({
+                targets: this.platforms[this.plataforma_activa],
+                alpha: 0,
+                ease: 'Linear',       // 'Cubic', 'Elastic', 'Bounce', 'Back'
+                duration: 1000,
+                repeat: 0,            // -1: infinity
+                yoyo: false
+            });
+            //this.platforms[this.plataforma_activa].alpha = 0;
             this.puede_despegar = false;
             
             if (this.plataforma_activa !== this.proxima_plataforma_para_descender) {
