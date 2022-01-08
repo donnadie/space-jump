@@ -12,7 +12,7 @@ sceneGame.init = function() {
     this.collider_platforms = [];
     this.sky_background = [];
     this.empuje = 0;
-    this.maximo_empuje = 250;
+    this.maximo_empuje = 240;
     this.dejar_de_acelerar = true;
     this.plataforma_activa = 0;
     this.plataforma_anterior = 0;
@@ -45,6 +45,7 @@ sceneGame.init = function() {
     tiempo_transcurrido_de_juego = 0;
     this.delay_warp = 0;
     this.space_cow_velocity_x = 0;
+    this.limite_inferior = 570;
 };
 
 sceneGame.preload = function() {
@@ -277,37 +278,33 @@ sceneGame.update = function() {
     this.twin_star.anims.play("twin_star");
   }
 
-  if (this.player.y > 570) {
-    
+  if (this.player.y > this.limite_inferior) {
       
-      /*
-      
-      this.platforms[this.plataforma_activa].alpha = 1;
-      
-      this.player.y = this.platforms[this.plataforma_activa].y - 50;
-      this.platforms[this.plataforma_activa].body.checkCollision.up = true;
-      */
-      if(this.spaceship_drop_sound.isPlaying === false){
+      if(this.spaceship_drop_sound.isPlaying === false && 
+        this.spaceship_crash_sound.isPlaying === false){
         
         this.spaceship_drop_sound.stop();
-        this.spaceship_crash_sound.play();
         this.space_sound.stop();
-        this.background_scene_game_sound.stop();
-        sceneGame.end(); 
+
+        this.spaceship_crash_sound.play();
+        
+        this.cameras.main.shake(2000, 0.08, true, function(camera, progress) {
+            if (progress > .99) {
+                sceneGame.end();
+            }
+          });
+        
       }
   }else{
     
-    if (this.player.y >= this.platforms[this.plataforma_activa].y) {
-
-      
-      if(this.spaceship_drop_sound.isPlaying === false) {
-          
-          this.spaceship_thrust_sound.stop();
-          this.spaceship_drop_sound.play();
-      }
-  
+    if (this.player.y >= this.platforms[this.plataforma_activa].y && 
+        this.spaceship_drop_sound.isPlaying === false) {
+        
+        this.background_scene_game_sound.stop();
+        this.spaceship_thrust_sound.stop();
+        this.spaceship_drop_sound.play();
+        
     } 
-     
   }
 
 if (this.cursors.up.isUp && this.pointer_abajo === false)
